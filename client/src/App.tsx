@@ -1,12 +1,18 @@
-import React from 'react';
+import React from 'react'
+import { ICustomer, IAdmin, } from './model/user'
 
+interface Props {
+    user: ICustomer | IAdmin,
+    setUser: (user: ICustomer | IAdmin) => void,
+    accessToken: string,
+    setAccessToken: (accessToken: string) => void,
+}
 
-function App() {
-  return (
+export const App: React.FC<Props> = ({ user, setUser, accessToken, setAccessToken, }) => {
+
+    return (
     <div>
-        <h1>Hello Dorin</h1>
    </div>
   );
 }
 
-export default App;
