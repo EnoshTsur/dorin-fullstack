@@ -1,5 +1,6 @@
 import React from 'react'
 import { ICustomer, IAdmin, } from './model/user'
+import LoginPopup from './components/LoginPopup/LoginPopup'
 
 interface Props {
     user: ICustomer | IAdmin,
@@ -12,6 +13,7 @@ export const App: React.FC<Props> = ({ user, setUser, accessToken, setAccessToke
 
     return (
     <div>
+        <LoginPopup />
    </div>
   );
 }
