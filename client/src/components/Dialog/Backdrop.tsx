@@ -18,4 +18,5 @@ interface Props {
 const Backdrop: React.FC<Props> = ({ show, onClick, }) => 
     show && <div style={style} onClick={onClick}></div>
 
+
 export default Backdrop

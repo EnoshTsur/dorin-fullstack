@@ -11,10 +11,13 @@ interface Props {
 
 export const App: React.FC<Props> = ({ user, setUser, accessToken, setAccessToken, }) => {
 
-    return (
-    <div>
-        <LoginPopup />
-   </div>
-  );
+        return (
+            <div>
+                <LoginPopup 
+                    accessToken={accessToken} 
+                    setAccessToken={setAccessToken}
+                />
+            </div>
+        );
 }
 

@@ -1,4 +1,4 @@
-import { App as Component } from '../App'
+import { App, } from '../App'
 import { compose, } from 'redux'
 import { connect, } from 'react-redux'
 import { Dispatch, } from 'react'
@@ -26,5 +26,5 @@ export const Container = compose(
         mapStateToProps,
         mapDispatchToProps
     )
-)(Component)
+)(App)
 
