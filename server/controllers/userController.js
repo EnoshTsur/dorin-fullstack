@@ -109,8 +109,6 @@ router.post('/login', validateLogin , (req, res) => {
 
         const user = existUser[0]
 
-        console.log(`\n\n\n\n\n\n${JSON.stringify(user.toJSON())}\n\n\n\n\n\n\n`)
-
         jwt.sign(user.toJSON(), secret, (err, token) => {
     
              return res.json(

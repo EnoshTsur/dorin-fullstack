@@ -1,0 +1,17 @@
+.LoginContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 20rem;
+    transform: translate(-50%, -50%);
+    border-radius: 7px;
+    background-color: white;
+    z-index: 2;
+}
+
+@media (max-width: 375px) {
+
+    .LoginContainer {
+      max-width: 80%;  
+    }
+}

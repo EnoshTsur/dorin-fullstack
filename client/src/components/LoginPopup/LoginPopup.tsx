@@ -1,18 +1,9 @@
 import React from 'react'
 import Dialog from '../Dialog/Dialog'
 import { tokenStorage, } from '../../dataSources/localStorage'
-
-const style: { [key: string]: string | number } = {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    width: '20rem',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: '7px',
-    backgroundColor: 'white',
-    padding: '1rem',
-    zIndex: 2,
-}
+import classes from './LoginPopup.module.css'
+import TabView from '../Tab/TabView'
+import { SignUp, } from '../Sign/Sign'
 
 interface Props {
     accessToken: string  | null,
@@ -24,15 +15,28 @@ const LoginPopup: React.FC<Props> = (props) => {
 
     const [isOpen, setOpen, ] = React.useState<boolean>(true)
     
+    const { LoginContainer, } = classes
+
+    const A: React.FC<{header: string}> = ({ header }) => (
+        <div>{header}</div>
+    )
+
     return (
         <Dialog show={isOpen}>
 
-            <div style={style} >
-                <h1> hi!!! </h1>
+            <div className={LoginContainer} >
+                <TabView 
+                    data={[ 
+                        {title: 'Sign up', component: (<SignUp />)},
+                        {title: 'Sign in', component: (<SignUp />)}
+                    ]}
+                />
             </div>
 
         </Dialog>
     )
+
+  
 
 }
 
