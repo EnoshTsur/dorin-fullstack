@@ -1,0 +1,75 @@
+.Btn {
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    background-color: #d9d9d9;
+    border: 2px solid #f0f0f0;
+}
+
+.Btn:hover {
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+.Btn:active {
+    background-color: #b3b3b3;
+}
+
+.Btn:focus {
+    outline: none;
+}
+
+.BtnSuccess {
+    background-color: #2ebc4f;
+    border: 2px solid #5bd778;
+}
+
+.BtnSuccess:hover {
+    background-color: #23903c;
+}
+
+.BtnSuccess:active {
+    background-color: #19672b;
+}
+
+.BtnWarning {
+    background-color: #ffc21a;
+    border: 2px solid #ffd666;
+}
+
+.BtnWarning:hover {
+    background-color: #e6a800;
+}
+
+.BtnWarning:active {
+    background-color: #cc9600;
+}
+
+.BtnInfo {
+    background-color: #66b3ff;
+    border: 2px solid #b3d4ff;
+}
+
+.BtnInfo:hover {
+    background-color: #3399ff;
+}
+
+.BtnInfo:active {
+    background-color: #0080ff;
+}
+
+.BtnError {
+    background-color: #ff5c33;
+    border: 2px solid #ff704d;
+}
+
+.BtnError:hover{
+    background-color: #e62e00;
+}
+
+.BtnError:active {
+    background-color: #b32400;
+}
+
+

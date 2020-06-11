@@ -3,7 +3,7 @@ import Dialog from '../Dialog/Dialog'
 import { tokenStorage, } from '../../dataSources/localStorage'
 import classes from './LoginPopup.module.css'
 import TabView from '../Tab/TabView'
-import { SignUp, } from '../Sign/Sign'
+import { SignUp, SignIn } from '../Sign/Sign'
 
 interface Props {
     accessToken: string  | null,
@@ -28,7 +28,7 @@ const LoginPopup: React.FC<Props> = (props) => {
                 <TabView 
                     data={[ 
                         {title: 'Sign up', component: (<SignUp />)},
-                        {title: 'Sign in', component: (<SignUp />)}
+                        {title: 'Sign in', component: (<SignIn />)}
                     ]}
                 />
             </div>
