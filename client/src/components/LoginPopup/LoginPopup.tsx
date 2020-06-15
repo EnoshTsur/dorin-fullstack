@@ -26,8 +26,24 @@ const LoginPopup: React.FC<Props> = ({ user, setUser, accessToken, setAccessToke
             <div className={LoginContainer} >
                 <TabView 
                     data={[ 
-                        {title: 'Sign up', component: (<SignUp />)},
-                        {title: 'Sign in', component: (<SignIn />)}
+                        {
+                            title: 'Sign up', 
+                            component: (
+                                <SignUp 
+                                    setUser={setUser} 
+                                    setAccessToken={setAccessToken} 
+                                />
+                            )
+                        },
+                        {
+                            title: 'Sign in', 
+                            component: (
+                                <SignIn 
+                                    setUser={setUser} 
+                                    setAccessToken={setAccessToken} 
+                                />
+                            )
+                        }
                     ]}
                 />
             </div>

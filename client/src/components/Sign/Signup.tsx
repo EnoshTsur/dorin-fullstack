@@ -5,13 +5,18 @@ import { rest, } from '../../fetch-api/index'
 import classes from './Sign.module.css'
 import { USER_REGISTER, USER_LOGIN, } from '../../configuration/urls'
 import { isEmptyStringIn, } from '../../utils/validation'
-
+import { ICustomer, IAdmin, } from '../../model/user'
 
 const { post: register } = rest(USER_REGISTER)
 const { post: login } = rest(USER_LOGIN)
 
+interface Props {
+    setUser: (user: ICustomer | IAdmin) => void,
+    setAccessToken: (accessToken: string) => void
+}
 
-const SignUp: React.FC = () => {
+
+const SignUp: React.FC<Props> = ({ setUser, setAccessToken, }) => {
    
     const [ firstName , setFirstName, ] = React.useState('')
     const [ lastName, setLastName, ] = React.useState('')
