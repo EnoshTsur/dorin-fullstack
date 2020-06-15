@@ -1,23 +1,14 @@
 import React from 'react'
-import { ICustomer, IAdmin, } from './model/user'
-import LoginPopup from './components/LoginPopup/LoginPopup'
+import { LoginContainer } from './components/LoginPopup/LoginContainer'
 
-interface Props {
-    user: ICustomer | IAdmin,
-    setUser: (user: ICustomer | IAdmin) => void,
-    accessToken: string,
-    setAccessToken: (accessToken: string) => void,
-}
-
-export const App: React.FC<Props> = ({ user, setUser, accessToken, setAccessToken, }) => {
+const App: React.FC = () => {
 
         return (
             <div>
-                <LoginPopup 
-                    accessToken={accessToken} 
-                    setAccessToken={setAccessToken}
-                />
+                <LoginContainer />
             </div>
         );
 }
 
+
+export default App

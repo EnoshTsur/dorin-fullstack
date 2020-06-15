@@ -3,23 +3,22 @@ import Dialog from '../Dialog/Dialog'
 import { tokenStorage, } from '../../dataSources/localStorage'
 import classes from './LoginPopup.module.css'
 import TabView from '../Tab/TabView'
-import { SignUp, SignIn } from '../Sign/Sign'
+import SignIn from '../Sign/Signin'
+import SignUp from '../Sign/Signup'
+import { ICustomer, IAdmin, } from '../../model/user'
 
 interface Props {
-    accessToken: string  | null,
-    setAccessToken: (token: string) => void
+    user: ICustomer | IAdmin,
+    setUser: (user: ICustomer | IAdmin) => void,
+    accessToken: string,
+    setAccessToken: (accessToken: string) => void,
 }
 
-const LoginPopup: React.FC<Props> = (props) => {
-
+const LoginPopup: React.FC<Props> = ({ user, setUser, accessToken, setAccessToken, }) => {
 
     const [isOpen, setOpen, ] = React.useState<boolean>(true)
     
     const { LoginContainer, } = classes
-
-    const A: React.FC<{header: string}> = ({ header }) => (
-        <div>{header}</div>
-    )
 
     return (
         <Dialog show={isOpen}>

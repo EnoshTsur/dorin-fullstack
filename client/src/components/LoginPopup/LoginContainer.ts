@@ -1,10 +1,10 @@
-import { App, } from '../App'
+import LoginPopup from './LoginPopup'
 import { compose, } from 'redux'
 import { connect, } from 'react-redux'
 import { Dispatch, } from 'react'
-import { IState, } from './userReducer'
-import { IAction, SetUser, SetAccessToken, } from './actions'
-import { ICustomer, IAdmin, } from '../model/user'
+import { IState, } from '../../redux/userReducer'
+import { IAction, SetUser, SetAccessToken, } from '../../redux/actions'
+import { ICustomer, IAdmin, } from '../../model/user'
 
 const mapStateToProps = (state: IState) => {
     return {
@@ -21,10 +21,10 @@ const mapDispatchToProps = (dispatch: Dispatch<IAction>)=> {
     }
 }
 
-export const Container = compose(
+export const LoginContainer = compose(
     connect(
         mapStateToProps,
         mapDispatchToProps
     )
-)(App)
+)(LoginPopup)
 
