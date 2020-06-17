@@ -5,18 +5,13 @@ import { rest, } from '../../fetch-api/index'
 import classes from './Sign.module.css'
 import { USER_REGISTER, USER_LOGIN, } from '../../configuration/urls'
 import { isEmptyStringIn, } from '../../utils/validation'
-import { ICustomer, IAdmin, } from '../../model/user'
+import { useDispatch, } from 'react-redux'
 
 const { post: register } = rest(USER_REGISTER)
 const { post: login } = rest(USER_LOGIN)
 
-interface Props {
-    setUser: (user: ICustomer | IAdmin) => void,
-    setAccessToken: (accessToken: string) => void
-}
 
-
-const SignUp: React.FC<Props> = ({ setUser, setAccessToken, }) => {
+const SignUp: React.FC = () => {
    
     const [ firstName , setFirstName, ] = React.useState('')
     const [ lastName, setLastName, ] = React.useState('')
@@ -25,13 +20,23 @@ const SignUp: React.FC<Props> = ({ setUser, setAccessToken, }) => {
 
     const { FormContainer, InputContainer, } = classes
 
-    function signup(): void {
+    const dispatch = useDispatch()
 
-       register({ firstName, lastName, username, password, })
+    function signup(): void {
+        const user = { firstName, lastName, username, password }
+
+       register(user)
         .then(({sucess, content, }) => {
+                
+                dispatch({ type: 'SET_USER', payload: user })
 
                 login({ username, password})
-                .then(r => console.log(r))
+
+                .then(({ content, }) => 
+                    dispatch({ 
+                        type: 'SET_ACCESS_TOKEN', 
+                        payload: content, 
+                    }))
                 .catch(error => console.log(error))
          })
         .catch(error => console.log(error))

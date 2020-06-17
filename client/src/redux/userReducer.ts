@@ -8,7 +8,7 @@ export interface IState {
 }
 
 const initState: IState = {
-    user: null,
+    user: null, 
     accessToken: null,
 }
 

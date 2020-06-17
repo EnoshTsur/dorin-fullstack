@@ -36,7 +36,7 @@ const TabView: React.FC<Props> = ({ data, }) => {
             </div>
 
                 {
-                    components.map((c, index) => index == activeTab && (
+                    components.map((c, index) => index === activeTab && (
                         <div key={`t${index}`}>
                             {
                                 (c)

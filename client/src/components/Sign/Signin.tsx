@@ -10,12 +10,7 @@ const { FormContainer, InputContainer, } = classes
 
 const { post: login } = rest(USER_LOGIN)
 
-interface Props {
-    setUser: (user: ICustomer | IAdmin) => void,
-    setAccessToken: (accessToken: string) => void
-}
-
-const SignIn: React.FC<Props> = ({ setUser, setAccessToken,  }) => {
+const SignIn: React.FC = () => {
 
     const [ username, setUsername, ] = React.useState('')
     const [ password, setPassword, ] = React.useState('')

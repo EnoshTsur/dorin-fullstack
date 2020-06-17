@@ -1,11 +1,11 @@
 import React from 'react'
-import { LoginContainer } from './components/LoginPopup/LoginContainer'
+import LoginPopup from './components/LoginPopup/LoginPopup'
 
 const App: React.FC = () => {
 
         return (
             <div>
-                <LoginContainer />
+                <LoginPopup />
             </div>
         );
 }
