@@ -1,17 +1,17 @@
 import React from 'react'
 import Input from '../Input/Input'
 import Button from '../Button/Button'
-import { rest, } from '../../fetch-api/index'
+import { rest, } from '../../Fetch/Fetch'
 import classes from './Sign.module.css'
-import { USER_REGISTER, USER_LOGIN, } from '../../configuration/urls'
+import { USER_REGISTER_URL, USER_LOGIN_URL, } from '../../configuration/urls'
 import { isEmptyStringIn, } from '../../utils/validation'
 import { ICustomer, } from '../../model/user'
 import { withCustomer, } from '../../utils/transformUtil'
 import { tokenStorage } from '../../dataSources/localStorage'
 import UserContext from '../../context/UserContext'
 
-const { post: register } = rest(USER_REGISTER)
-const { post: login } = rest(USER_LOGIN)
+const { post: register } = rest(USER_REGISTER_URL)
+const { post: login } = rest(USER_LOGIN_URL)
 
 const initialState: ICustomer = {
     firstName: null,
@@ -33,6 +33,7 @@ const SignUp: React.FC = () => {
         console.log(user)
         register(user)
             .then(({ sucess, content, }) => {
+                console.log('!! ', content)
                 const { username, password } = user;
                 login({ username, password })
                     .then(({ content, }) =>{

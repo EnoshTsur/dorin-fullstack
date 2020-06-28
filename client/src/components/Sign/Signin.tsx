@@ -2,47 +2,54 @@ import React from 'react'
 import Input from '../Input/Input'
 import Button from '../Button/Button'
 import { isEmptyStringIn, } from '../../utils/validation'
-import { rest, } from '../../fetch-api/index'
-import { USER_REGISTER, USER_LOGIN, } from '../../configuration/urls'
 import classes from './Sign.module.css'
-import { ICustomer, IAdmin, } from '../../model/user'
+import { userActions, } from '../../reducers/actions'
+import { ADMIN_LOGIN_URL, USER_LOGIN_URL, } from '../../configuration/urls'
+import { Post, Request, } from '../../Fetch/Fetch'
+import LoginState from '../../model/loginState'
 const { FormContainer, InputContainer, } = classes
 
-const { post: login } = rest(USER_LOGIN)
+interface Props {
+    role: 'customer' | 'admin',
+    loginState: LoginState,
+    setLoginState: (loginState: LoginState) => void,
+    sendRequest: boolean,
+    setSendRequest: (sendRequest: boolean) => void
+}
 
-const SignIn: React.FC = () => {
+const SignIn: React.FC<Props> = ({ role, loginState, setLoginState, sendRequest, setSendRequest}) => {
 
-    const [ username, setUsername, ] = React.useState('')
-    const [ password, setPassword, ] = React.useState('')
-
-    function signIn(): void {
-        login({ username, password, })
-        .then(r => console.log(r))
-        .catch(error => console.log(error))
-    }
+    const url = role === 'admin' ? ADMIN_LOGIN_URL : USER_LOGIN_URL
+    const { username, password, } = loginState
 
     return (
         <div className={FormContainer}>
             <div className={InputContainer}>
                 <Input
-                    handleChange={value => setUsername(value)}
+                    handleChange={value => setLoginState({ ...loginState, username: value })}
                     placeholder="Username"
-                 />
+                />
                 <Input
-                    handleChange={value => setPassword(value)}
+                    handleChange={value => setLoginState({ ...loginState, password: value })}
                     placeholder="Password"
                     type="password"
-                 />
+                />
             </div>
-           <Button
-               isDisabled={isEmptyStringIn(
-                    username,
-                    password
-               )}
-               type="success"
-               title="Login"
-               onClick={() => signIn()}
-           /> 
+            <Button
+                isDisabled={isEmptyStringIn(username, password)}
+                type="success"
+                title="Login"
+                onClick={() => setSendRequest(true)}
+            />
+            {
+                sendRequest && (
+                    <Post url={url} body={loginState} >
+                        {({ data, loading, error, }: Request) => {
+                            
+                        }}
+                    </Post>
+                )
+            }
         </div>
     )
 }

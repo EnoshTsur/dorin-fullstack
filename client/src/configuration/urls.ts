@@ -1,8 +1,10 @@
-const USER_REGISTER = 'http://localhost:5001/user/register'
-const USER_LOGIN = 'http://localhost:5001/user/login'
+const USER_REGISTER_URL = 'http://localhost:5001/user/register'
+const USER_LOGIN_URL = 'http://localhost:5001/user/login'
+const ADMIN_LOGIN_URL = 'http://localhost:5001/user/login'
 
 export { 
 
-    USER_REGISTER,
-    USER_LOGIN,
+    USER_REGISTER_URL,
+    USER_LOGIN_URL,
+    ADMIN_LOGIN_URL,
 }

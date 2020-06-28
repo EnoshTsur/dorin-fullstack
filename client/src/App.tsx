@@ -1,28 +1,34 @@
 import React from 'react'
 import LoginPopup from './components/LoginPopup/LoginPopup'
 import UserContext from './context/UserContext'
+import { tokenStorage, } from './dataSources/localStorage'
+import { isAllMatch, } from './utils/validation'
+import userReducer from './reducers/userReducer'
+
+
 
 const App: React.FC = () => {
 
-    const [ user, setUser, ] = React.useState({})
-    const [ accessToken, setAccessToken, ] = React.useState('')
+    const [userState, userDispatch,] = React.useReducer(
+        userReducer, { accessToken: '', user: null}
+    )
+
+    const { user, } = userState
 
     const { Provider, } = UserContext;
 
-        return (
-            <div>
-                <Provider value={({ 
-                    
-                     user, 
-                     setUser, 
-                     accessToken, 
-                     setAccessToken
+    return (
+        <div>
+            <Provider value={({  userState, userDispatch, })}>
+                {
+                    isAllMatch(null)(user, tokenStorage.getItem()) && (
+                        <LoginPopup />
+                    )
+                }
 
-                   })}>
-                    <LoginPopup />
-                </Provider>    
-            </div>
-        );
+            </Provider>
+        </div>
+    );
 }
 
 
