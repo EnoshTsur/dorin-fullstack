@@ -1,12 +1,11 @@
 import React from 'react'
-import Input from '../Input/Input'
-import Button from '../Button/Button'
-import { isEmptyStringIn, } from '../../utils/validation'
-import classes from './Sign.module.css'
-import { userActions, } from '../../reducers/actions'
-import { ADMIN_LOGIN_URL, USER_LOGIN_URL, } from '../../configuration/urls'
-import { Post, Request, } from '../../Fetch/Fetch'
-import LoginState from '../../model/loginState'
+import Input from '../../Input/Input'
+import Button from '../../Button/Button'
+import { isEmptyStringIn, } from '../../../utils/validation'
+import classes from '../Sign.module.css'
+import { ADMIN_LOGIN_URL, USER_LOGIN_URL, } from '../../../configuration/urls'
+import { Post, Request, } from '../../../Fetch/Fetch'
+import LoginState from '../../../model/loginState'
 const { FormContainer, InputContainer, } = classes
 
 interface Props {

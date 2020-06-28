@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginPopup from './components/LoginPopup/LoginPopup'
+import LoginPopup from './components/Sign/SignContainer/SignContainer'
 import UserContext from './context/UserContext'
 import { tokenStorage, } from './dataSources/localStorage'
 import { isAllMatch, } from './utils/validation'

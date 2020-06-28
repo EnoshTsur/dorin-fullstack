@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginState from '../../model/loginState'
+import LoginState from '../../../model/loginState'
 
 export interface LoginProps {
     loginState: LoginState,
