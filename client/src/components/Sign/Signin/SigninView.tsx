@@ -16,7 +16,7 @@ interface Props {
     setSendRequest: (sendRequest: boolean) => void
 }
 
-const SignIn: React.FC<Props> = ({ role, loginState, setLoginState, sendRequest, setSendRequest}) => {
+const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequest, setSendRequest}) => {
 
     const url = role === 'admin' ? ADMIN_LOGIN_URL : USER_LOGIN_URL
     const { username, password, } = loginState
@@ -54,4 +54,4 @@ const SignIn: React.FC<Props> = ({ role, loginState, setLoginState, sendRequest,
 }
 
 
-export default SignIn
+export default SigninView

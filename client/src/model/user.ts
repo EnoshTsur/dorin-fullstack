@@ -11,3 +11,9 @@ export interface IAdmin {
     password: string    
     
 }
+export const customerInitialState = Object.freeze({
+    firstName: '',
+    lastName: '',
+    username: '',
+    password: ''
+})

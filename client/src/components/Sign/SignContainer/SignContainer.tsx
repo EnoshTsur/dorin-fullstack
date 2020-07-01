@@ -3,11 +3,11 @@ import Dialog from '../../Dialog/Dialog'
 import classes from './SignContainer.module.css'
 import TabView from '../../Tab/TabView'
 import SignIn from '../Signin/SigninView'
-import SignUp from '../Signup/Signup'
-import Login, { LoginProps, } from '../Signin/Signin'
+import SignUp from '../Signup/SignupView'
+import Signin, { LoginProps, } from '../Signin/Signin'
 
 const signIn: (role: 'customer' | 'admin') => any = role => (
-    <Login
+    <Signin
         key={role}
         render={({ loginState, setLoginState, sendRequest, setSendRequest }: LoginProps) => (
             <SignIn
