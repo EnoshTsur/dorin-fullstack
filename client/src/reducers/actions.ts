@@ -4,8 +4,8 @@ export const userActions = Object.freeze({
 })
 
 export const userFormActions = Object.freeze({
-    FIRST_NAME: 'FIRST_NAME',
-    LAST_NAME: 'LAST_NAME',
-    USERNAME: 'USERNAME',
-    PASSWORD: 'PASSWORD'
+    SET_FIRST_NAME: 'SET_FIRST_NAME',
+    SET_LAST_NAME: 'SET_LAST_NAME',
+    SET_USERNAME: 'SET_USERNAME',
+    SET_PASSWORD: 'SET_PASSWORD'
 })

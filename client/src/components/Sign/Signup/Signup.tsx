@@ -1,7 +1,12 @@
 import React from 'react'
-import userFormReducer from '../../../reducers/userFormReducer'
-import { customerInitialState, } from '../../../model/user'
+import userFormReducer , { UserFormDispatch, } from '../../../reducers/userFormReducer'
+import { customerInitialState, ICustomer,  } from '../../../model/user'
 
+
+export interface UserFormProps {
+    userForm: ICustomer,
+    userFormDispatch: ({type, payload}: UserFormDispatch) => ICustomer 
+}
 
 const Signup: React.FC<{ render: any }> = ({ render, }) => {
 
@@ -10,10 +15,10 @@ const Signup: React.FC<{ render: any }> = ({ render, }) => {
     return (
         <>
             {
-                render(
+                render({
                     userForm,
                     userFormDispatch,
-                )
+                })
             }
         </>
     )

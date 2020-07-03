@@ -1,6 +1,7 @@
 import { userActions, } from './actions'
 import { ICustomer, IAdmin,} from '../model/user'
 import Dispatch from './dispatchType'
+import { tokenStorage, } from '../dataSources/localStorage'
 
 
 
@@ -12,15 +13,16 @@ interface Payload {
 
 export default function userReducer(state: any, action: Dispatch) {
     const { type, payload,} = action
-    const { accessToken, user, }: Payload = payload
+    const { accessToken, }: Payload = payload
     const { USER_LOGIN, ADMIN_LOGIN, } = userActions
 
     switch (type) {
         case USER_LOGIN:
-            return { accessToken, user }
+            tokenStorage.setItem(accessToken);
+            return { accessToken }
 
         case ADMIN_LOGIN:
-            return { accessToken, user }
+            return { accessToken }
         default:
             return { ...state }
     }

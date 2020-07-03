@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginPopup from './components/Sign/SignContainer/SignContainer'
+import SignContainer from './components/Sign/SignContainer/SignContainer'
 import UserContext from './context/UserContext'
 import { tokenStorage, } from './dataSources/localStorage'
 import { isAllMatch, } from './utils/validation'
@@ -22,7 +22,7 @@ const App: React.FC = () => {
             <Provider value={({  userState, userDispatch, })}>
                 {
                     isAllMatch(null)(user, tokenStorage.getItem()) && (
-                        <LoginPopup />
+                        <SignContainer />
                     )
                 }
 

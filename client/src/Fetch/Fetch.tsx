@@ -80,6 +80,7 @@ const Post: React.FC<WithBodyProps> = ({ url, body, children }) => {
 
     const [result, setResult,] = React.useState(initialValue)
 
+
     React.useEffect(() => {
         const getData = async () => {
             const data = await fetch(url, {
@@ -165,8 +166,24 @@ const Fetch = Object.freeze({
 
 })
 
+export interface RequestState {
+    sendRequest: boolean,
+    setSendRequest: (sendRequest: boolean) => void
+}
+
+const Requested: React.FC<{ render: any}> = ({ render, }) => {
+
+    const [ sendRequest, setSendRequest, ] = React.useState<boolean>(false)
+
+    return (
+        <>
+        { render({ sendRequest, setSendRequest, }) }
+        </>
+    )
+}
+
 export default Fetch
-export { Get, Post, Delete, Put, }
+export { Get, Post, Delete, Put, Requested, }
 
 
 

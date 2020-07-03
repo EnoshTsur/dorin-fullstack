@@ -4,8 +4,6 @@ import LoginState from '../../../model/loginState'
 export interface LoginProps {
     loginState: LoginState,
     setLoginState: (state: LoginState) => void,
-    sendRequest: boolean,
-    setSendRequest: (state: boolean) => void
 }
 
 const Login: React.FC<{ render: any }> = ({ render, }) => {
@@ -14,15 +12,11 @@ const Login: React.FC<{ render: any }> = ({ render, }) => {
         { username: '', password: '' }
     )
 
-    const [sendRequest, setSendRequest,] = React.useState(false)
-
     return (
         <>
             {render({
                 loginState,
                 setLoginState,
-                sendRequest,
-                setSendRequest
             })}
         </>
     )

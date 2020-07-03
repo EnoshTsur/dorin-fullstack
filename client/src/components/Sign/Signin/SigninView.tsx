@@ -6,7 +6,12 @@ import classes from '../Sign.module.css'
 import { ADMIN_LOGIN_URL, USER_LOGIN_URL, } from '../../../configuration/urls'
 import { Post, Request, } from '../../../Fetch/Fetch'
 import LoginState from '../../../model/loginState'
+import UserContext from '../../../context/UserContext'
+import { userActions, } from '../../../reducers/actions'
+import Loading from '../../Loading/Loading'
+
 const { FormContainer, InputContainer, } = classes
+
 
 interface Props {
     role: 'customer' | 'admin',
@@ -16,10 +21,18 @@ interface Props {
     setSendRequest: (sendRequest: boolean) => void
 }
 
-const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequest, setSendRequest}) => {
+const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequest, setSendRequest }) => {
+
+    const { USER_LOGIN, ADMIN_LOGIN } = userActions
 
     const url = role === 'admin' ? ADMIN_LOGIN_URL : USER_LOGIN_URL
+    const actionType = role === 'admin' ? ADMIN_LOGIN : USER_LOGIN
+
+
     const { username, password, } = loginState
+    const { userDispatch, } = React.useContext(UserContext)
+    const usernameInput = React.useRef()
+    const passwordInput = React.useRef()
 
     return (
         <div className={FormContainer}>
@@ -44,7 +57,19 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                 sendRequest && (
                     <Post url={url} body={loginState} >
                         {({ data, loading, error, }: Request) => {
-                            
+
+                            if (error) {
+                                console.error('[Error]: SigninView( fetch: POST) ', error)
+                            }
+
+                            if (data) {
+                                const { content: accessToken } = data
+                                userDispatch({ type: actionType, payload: { accessToken } })
+                            }
+
+                            return !!loading && (
+                                <Loading />
+                            )
                         }}
                     </Post>
                 )
