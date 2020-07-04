@@ -1,31 +1,6 @@
 import React from 'react'
 
 
-interface RestApi {
-    post: (body: object) => Promise<any>
-}
-
-function rest(url: string): RestApi {
-
-    async function post(body: object): Promise<any> {
-        const data = await fetch(url, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            body: JSON.stringify(body)
-        })
-
-        return await data.json()
-    }
-
-    return {
-        post
-    }
-}
-
-export { rest, }
-
 export interface Request {
     data: any,
     loading: boolean,
@@ -97,7 +72,7 @@ const Post: React.FC<WithBodyProps> = ({ url, body, children }) => {
             .then(data => setResult({ data, loading: false, error: null }))
             .catch(error => setResult({ data: null, loading: false, error, }))
 
-    }, [url])
+    }, [])
 
     return (
         <>

@@ -7,6 +7,7 @@ import SignupView from '../Signup/SignupView'
 import Signin, { LoginProps, } from '../Signin/Signin'
 import Signup, { UserFormProps, } from '../Signup/Signup'
 import { Requested, RequestState } from '../../../Fetch/Fetch'
+import UserContext from '../../../context/UserContext'
 
 const signIn: (role: 'customer' | 'admin') => any = role => (
     <Signin
@@ -40,38 +41,37 @@ const signUp: () => any = () => (
 )
 
 
-const LoginPopup: React.FC = () => {
+const SigninContainer: React.FC = () => {
 
-    const [isOpen, setOpen,] = React.useState<boolean>(true)
 
     const { LoginContainer, } = classes
-
+    const { accessToken, } = React.useContext(UserContext)
     return (
-        <Dialog show={isOpen}>
-
-            <div className={LoginContainer} >
-                <TabView
-                    data={[
-                        {
-                            title: 'Sign up',
-                            component: signUp()
-                        },
-                        {
-                            title: 'Sign in',
-                            component: signIn("customer")
-                        },
-                        {
-                            title: 'Admin',
-                            component: signIn("admin")
-                        }
-                    ]}
-                />
-            </div>
-
+        <Dialog show={accessToken == null}>
+            { accessToken == null &&
+                <div className={LoginContainer} >
+                    <TabView
+                        data={[
+                            {
+                                title: 'Sign up',
+                                component: signUp()
+                            },
+                            {
+                                title: 'Sign in',
+                                component: signIn("customer")
+                            },
+                            {
+                                title: 'Admin',
+                                component: signIn("admin")
+                            }
+                        ]}
+                    />
+                </div>
+            }
         </Dialog>
     )
 
 
 }
 
-export default LoginPopup
+export default SigninContainer 

@@ -9,6 +9,7 @@ import LoginState from '../../../model/loginState'
 import UserContext from '../../../context/UserContext'
 import { userActions, } from '../../../reducers/actions'
 import Loading from '../../Loading/Loading'
+import { tokenStorage } from '../../../dataSources/localStorage'
 
 const { FormContainer, InputContainer, } = classes
 
@@ -30,9 +31,9 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
 
 
     const { username, password, } = loginState
-    const { userDispatch, } = React.useContext(UserContext)
-    const usernameInput = React.useRef()
-    const passwordInput = React.useRef()
+    const { setAccessToken, } = React.useContext(UserContext)
+    const [ errorMessage, setErrorMessage, ] = React.useState('')
+
 
     return (
         <div className={FormContainer}>
@@ -63,8 +64,18 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                             }
 
                             if (data) {
-                                const { content: accessToken } = data
-                                userDispatch({ type: actionType, payload: { accessToken } })
+                                const { message, success, } = data
+                                if (!success) {
+                                    setErrorMessage(message)
+                                    setSendRequest(false)
+                               
+                                } else {
+                                    setSendRequest(false)
+                                    setErrorMessage('')
+                                    const { content: accessToken, } = data
+                                    setAccessToken(accessToken)
+                                    tokenStorage.setItem(accessToken)
+                                }
                             }
 
                             return !!loading && (
@@ -74,6 +85,7 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                     </Post>
                 )
             }
+            <h3>{errorMessage}</h3>
         </div>
     )
 }

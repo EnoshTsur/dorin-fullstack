@@ -2,18 +2,21 @@ import React from 'react'
 import Input from '../../Input/Input'
 import Button from '../../Button/Button'
 import classes from '../Sign.module.css'
-import { USER_REGISTER_URL, USER_LOGIN_URL, } from '../../../configuration/urls'
+import { USER_REGISTER_URL, } from '../../../configuration/urls'
 import { isEmptyStringIn, } from '../../../utils/validation'
 import { ICustomer, } from '../../../model/user'
-import { withCustomer, } from '../../../utils/transformUtil'
-import { tokenStorage } from '../../../dataSources/localStorage'
 import UserContext from '../../../context/UserContext'
 import { userFormActions, } from '../../../reducers/actions'
 import { UserFormDispatch, } from '../../../reducers/userFormReducer'
+import { Post, Request } from '../../../Fetch/Fetch'
+import Loading from '../../Loading/Loading'
+import { userActions, } from '../../../reducers/actions'
+import { isError } from 'util'
+import { tokenStorage } from '../../../dataSources/localStorage'
 
 export interface Props {
     userForm: ICustomer,
-    userFormDispatch: ({type, payload}: UserFormDispatch) => ICustomer 
+    userFormDispatch: ({ type, payload }: UserFormDispatch) => ICustomer
     sendRequest: boolean,
     setSendRequest: (sendRequest: boolean) => void
 }
@@ -21,37 +24,70 @@ export interface Props {
 const SignupView: React.FC<Props> = ({ userForm, userFormDispatch, sendRequest, setSendRequest, }) => {
 
     const { FormContainer, InputContainer, } = classes
-    const { user, setUser, accessToken, setAccessToken, } = React.useContext(UserContext)
-    const { SET_FIRST_NAME, SET_LAST_NAME, SET_USERNAME, SET_PASSWORD} = userFormActions
 
-   return (
+    const { accessToken, setAccessToken } = React.useContext(UserContext)
+    const { SET_FIRST_NAME, SET_LAST_NAME, SET_USERNAME, SET_PASSWORD } = userFormActions
+    const [ errorMessage, setErrorMessage, ] = React.useState('')
+
+    return (
         <div className={FormContainer} >
             <div className={InputContainer}>
                 <Input
-                    handleChange={value => userFormDispatch({ type: SET_FIRST_NAME, payload: value})}
+                    handleChange={value => userFormDispatch({ type: SET_FIRST_NAME, payload: value })}
                     placeholder="First Name"
                 />
                 <Input
-                    handleChange={value => userFormDispatch({ type: SET_LAST_NAME, payload: value})}
+                    handleChange={value => userFormDispatch({ type: SET_LAST_NAME, payload: value })}
                     placeholder="Last Name"
                 />
                 <Input
-                    handleChange={value => userFormDispatch({ type: SET_USERNAME, payload: value})}
+                    handleChange={value => userFormDispatch({ type: SET_USERNAME, payload: value })}
                     placeholder="Username"
                 />
                 <Input
-                    handleChange={value => userFormDispatch({ type: SET_PASSWORD, payload: value})}
+                    handleChange={value => userFormDispatch({ type: SET_PASSWORD, payload: value })}
                     placeholder="Password"
                     type="password"
                 />
             </div>
             <Button
+                isDisabled={isEmptyStringIn(...Object.values(userForm))}
                 type="success"
                 title="Send"
-                onClick={() => console.log('')}
+                onClick={() => setSendRequest(true)}
             />
-            <h1>{accessToken}</h1>
-            <h1></h1>
+            {
+                sendRequest && (
+                    <Post url={USER_REGISTER_URL} body={userForm} >
+                        {({ data, loading, error }: Request) => {
+                            if (error) {
+                                console.error('[Error]: SigninView( fetch: POST) ', error)
+                            }
+
+                            if (data) {
+                                const { message, success, } = data
+                                if (!success) {
+                                    setErrorMessage(message)
+                                    setSendRequest(false)
+                               
+                                } else {
+                                    setSendRequest(false)
+                                    setErrorMessage('')
+                                    const { content: accessToken, } = data
+                                    setAccessToken(accessToken)
+                                    tokenStorage.setItem(accessToken)
+                                }
+                    
+                            }
+
+                            if(loading) {
+                                return <Loading />
+                            }
+                        }}
+                    </Post>
+                )
+            }
+            <h3>{errorMessage}</h3>
         </div>
     );
 }
