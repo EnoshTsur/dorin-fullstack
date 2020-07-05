@@ -22,6 +22,6 @@
     
   },
   "include": [
-    "src", "src/reducers/userReducer.ts"
+    "src", "src/reducers/tokenReducer.ts"
   ]
 }

@@ -10,9 +10,7 @@ import { userFormActions, } from '../../../reducers/actions'
 import { UserFormDispatch, } from '../../../reducers/userFormReducer'
 import { Post, Request } from '../../../Fetch/Fetch'
 import Loading from '../../Loading/Loading'
-import { userActions, } from '../../../reducers/actions'
-import { isError } from 'util'
-import { tokenStorage } from '../../../dataSources/localStorage'
+import Label from '../../Label/Label'
 
 export interface Props {
     userForm: ICustomer,
@@ -25,7 +23,7 @@ const SignupView: React.FC<Props> = ({ userForm, userFormDispatch, sendRequest, 
 
     const { FormContainer, InputContainer, } = classes
 
-    const { accessToken, setAccessToken } = React.useContext(UserContext)
+    const { setAccessToken } = React.useContext(UserContext)
     const { SET_FIRST_NAME, SET_LAST_NAME, SET_USERNAME, SET_PASSWORD } = userFormActions
     const [ errorMessage, setErrorMessage, ] = React.useState('')
 
@@ -52,7 +50,7 @@ const SignupView: React.FC<Props> = ({ userForm, userFormDispatch, sendRequest, 
             </div>
             <Button
                 isDisabled={isEmptyStringIn(...Object.values(userForm))}
-                type="success"
+                mode="success"
                 title="Send"
                 onClick={() => setSendRequest(true)}
             />
@@ -75,7 +73,6 @@ const SignupView: React.FC<Props> = ({ userForm, userFormDispatch, sendRequest, 
                                     setErrorMessage('')
                                     const { content: accessToken, } = data
                                     setAccessToken(accessToken)
-                                    tokenStorage.setItem(accessToken)
                                 }
                     
                             }
@@ -87,7 +84,9 @@ const SignupView: React.FC<Props> = ({ userForm, userFormDispatch, sendRequest, 
                     </Post>
                 )
             }
-            <h3>{errorMessage}</h3>
+             {
+               errorMessage !== '' &&  <Label text={errorMessage} mode="error" />
+            }
         </div>
     );
 }

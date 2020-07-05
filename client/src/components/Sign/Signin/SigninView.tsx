@@ -7,9 +7,8 @@ import { ADMIN_LOGIN_URL, USER_LOGIN_URL, } from '../../../configuration/urls'
 import { Post, Request, } from '../../../Fetch/Fetch'
 import LoginState from '../../../model/loginState'
 import UserContext from '../../../context/UserContext'
-import { userActions, } from '../../../reducers/actions'
 import Loading from '../../Loading/Loading'
-import { tokenStorage } from '../../../dataSources/localStorage'
+import Label from '../../Label/Label'
 
 const { FormContainer, InputContainer, } = classes
 
@@ -24,11 +23,7 @@ interface Props {
 
 const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequest, setSendRequest }) => {
 
-    const { USER_LOGIN, ADMIN_LOGIN } = userActions
-
     const url = role === 'admin' ? ADMIN_LOGIN_URL : USER_LOGIN_URL
-    const actionType = role === 'admin' ? ADMIN_LOGIN : USER_LOGIN
-
 
     const { username, password, } = loginState
     const { setAccessToken, } = React.useContext(UserContext)
@@ -50,7 +45,7 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
             </div>
             <Button
                 isDisabled={isEmptyStringIn(username, password)}
-                type="success"
+                mode="success"
                 title="Login"
                 onClick={() => setSendRequest(true)}
             />
@@ -74,7 +69,6 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                                     setErrorMessage('')
                                     const { content: accessToken, } = data
                                     setAccessToken(accessToken)
-                                    tokenStorage.setItem(accessToken)
                                 }
                             }
 
@@ -85,7 +79,9 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                     </Post>
                 )
             }
-            <h3>{errorMessage}</h3>
+            {
+               errorMessage !== '' &&  <Label text={errorMessage} mode="error" />
+            }
         </div>
     )
 }

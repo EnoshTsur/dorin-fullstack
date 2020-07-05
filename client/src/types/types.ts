@@ -1,0 +1,1 @@
+export type mode = 'success' | 'info' | 'warning' | 'error' | 'default'

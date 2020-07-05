@@ -6,7 +6,7 @@ export interface LoginProps {
     setLoginState: (state: LoginState) => void,
 }
 
-const Login: React.FC<{ render: any }> = ({ render, }) => {
+const Signin: React.FC<{ render: any }> = ({ render, }) => {
 
     const [loginState, setLoginState] = React.useState<LoginState>(
         { username: '', password: '' }
@@ -22,4 +22,4 @@ const Login: React.FC<{ render: any }> = ({ render, }) => {
     )
 }
 
-export default Login
+export default Signin 

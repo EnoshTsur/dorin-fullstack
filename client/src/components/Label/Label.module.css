@@ -1,0 +1,41 @@
+.Lbl {
+    padding: 0.2rem 1rem;
+    background-image: radial-gradient(circle at 52% 48%, rgb(245, 245, 245), rgb(235, 235, 235));
+    border-radius: 7px;
+    margin: 1rem 0;
+    color: #707070;
+    animation: lbl-intro;
+    animation-duration: 1s;
+    
+}
+
+.LblError{
+    background-image: radial-gradient(circle at 52% 48%, #ffd7cd, #ffc0b0);
+    color: #e77254;
+    border: 2px solid #f7c2b4;
+}
+
+.LblSuccess{
+    background-image: radial-gradient(circle at 52% 48%, #76ee92, #a9f1b9);
+    color: #23903c;
+    border: 2px solid #74ce89;
+}
+
+.LblWarning{
+    background-image: radial-gradient(circle at 52% 48%, #ffdc7a, #ffe8a7);
+    color: #cfa329;
+    border: 2px solid #f5e7c0;
+}
+
+.LblInfo{
+    background-image: radial-gradient(circle at 52% 48%, #9bcbfc, #c3dbfc);
+    color: #559adf;
+    border: 2px solid #a8cbee;
+}
+
+@keyframes lbl-intro {
+
+    0% { opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}

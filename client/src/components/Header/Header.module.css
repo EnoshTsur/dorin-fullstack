@@ -1,0 +1,13 @@
+.Header {
+    text-align: center;
+    margin: 0;
+    background-image: radial-gradient(circle at 52% 48%, #596cd4, #6f99d4);
+    color: #b3ccf0;
+    text-shadow: 0 2px 3px darkblue;
+    padding: 1.5rem;
+    box-shadow: 0 4px 5px #a7a7a7;
+}
+
+.Header h1 {
+    margin: 0;
+}

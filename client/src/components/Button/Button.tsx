@@ -1,18 +1,11 @@
 import React from 'react'
 import classes from './Button.module.css'
-
-
-const success = 'success'
-const info = 'info'
-const warning = 'warning'
-const error= 'error'
-const defaultType = 'default'
-
-type buttonType = 'success' | 'info' | 'warning' | 'error' | 'default'
+import { mode, } from '../../types/types'
+import { generateStyle, } from '../../utils/styleUtils'
 
 
 interface Props {
-    type?: buttonType, 
+    mode?: mode, 
     onClick: any,
     title:  string,
     isDisabled?: boolean,
@@ -20,17 +13,17 @@ interface Props {
 }
 
 
-const Button: React.FC<Props> = ({ type = defaultType, onClick, title, isDisabled, }) => {
+const Button: React.FC<Props> = ({ mode = 'default', onClick, title, isDisabled, }) => {
 
     const { Btn, BtnSuccess, BtnInfo, BtnWarning, BtnError } = classes
-    const style = (className?: any) => `${Btn} ${!!className && className}`
+    const style = generateStyle(Btn)
 
     return (
         <button
-            className={type === success ? 
-                        style(BtnSuccess): type === error ? 
-                        style(BtnError): type === warning ? 
-                        style(BtnWarning): type === info ?
+            className={mode === 'success' ? 
+                        style(BtnSuccess): mode === 'error' ? 
+                        style(BtnError): mode === 'warning' ? 
+                        style(BtnWarning): mode === 'info' ?
                         style(BtnInfo): style() 
             }
             onClick={onClick}
