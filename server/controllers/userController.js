@@ -138,18 +138,50 @@ router.post('/adminlogin', validateLogin, (req, res) => {
 
     return isEqualsValues(username, password)(adminUsername, adminPassword) ?
 
-    jwt.sign(user, adminSecret, (err, token) => {
+        jwt.sign(user, adminSecret, (err, token) => {
 
-        return res.json(
+            return res.json(
 
-            new Response(
-                true,
-                '',
-                token
+                new Response(
+                    true,
+                    '',
+                    token
+                )
             )
-        )
-    }) : res.json(new Response(false, INVALID_ATTRIBUTES))
+        }) : res.json(new Response(false, INVALID_ATTRIBUTES))
 
 })
+
+router.get('/adminResource', verifyToken(adminSecret), (req, res, next) => {
+    return res.json({ admin: true, })
+})
+
+router.get('/customerResource', verifyToken(secret), (req, res, next) => {
+    return res.json({ customer: true, })
+})
+
+
+function verifyToken(secret) {
+    return (req, res, next) => {
+        const bearerHeader = req.headers['authorization']
+
+        if (!bearerHeader) {
+            return res.sendStatus(403)
+        }
+
+        const bearer = bearerHeader.split(' ')
+        const token = bearer[1]
+        req.token = token
+        try {
+
+            const user = jwt.verify(token, secret)
+            return next()
+
+        } catch (error) {
+            return res.json({ error, })
+        }
+    }
+}
+
 
 module.exports = router

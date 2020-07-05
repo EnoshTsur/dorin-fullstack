@@ -23,21 +23,3 @@ const PORT = process.env.PORT || 5001
 app.listen(PORT, () => 
     console.log(`Started at ${new Date()} on port: ${PORT}`))
 
-/*
-function verifyToken(req, res, next){
-   const bearerHeader = req.headers['authorization']
-   
-    if (!bearerHeader) {
-        
-        return res.sendStatus(403)
-
-    }
-
-    const bearer = bearerHeader.split(' ')
-    const token = bearer[1]
-    req.token = token
-    next();
-
-    
-}
-*/
