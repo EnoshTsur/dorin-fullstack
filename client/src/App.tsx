@@ -1,10 +1,11 @@
 import React from 'react'
+import { BrowserRouter, Switch, Route, } from 'react-router-dom'
 import SignContainer from './components/Sign/SignContainer/SignContainer'
 import UserContext from './context/UserContext'
 import { tokenStorage, } from './dataSources/localStorage'
 import tokenReducer from './reducers/tokenReducer'
 import Header from './components/Header/Header'
-
+import Vacation from './components/Vacation/Vacation'
 
 
 const App: React.FC = () => {
@@ -13,7 +14,7 @@ const App: React.FC = () => {
 
     React.useEffect(() => {
 
-        if(tokenStorage.getItem() != null) {
+        if (tokenStorage.getItem() != null) {
             setAccessToken(tokenStorage.getItem())
         }
 
@@ -25,7 +26,13 @@ const App: React.FC = () => {
     return (
         <Provider value={({ accessToken, setAccessToken, })}>
             <Header title="Vacationary" />
-            <SignContainer />
+            <BrowserRouter>
+                <Switch>
+                    <Route exact to='/vacations' component={Vacation} />
+                    <Route exact to='/' component={SignContainer} />
+                </Switch>
+            </BrowserRouter>
+            {/* <SignContainer /> */}
         </Provider>
     );
 }

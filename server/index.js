@@ -8,12 +8,13 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const userController = require('./controllers/userController')
-
+const vacationController = require('./controllers/vacationController')
 
 app.use(cors())
 app.use(bodyParser.json())
 
 app.use('/user', userController)
+app.use('/vacation', vacationController)
 
 mongoose.connect(db)
 

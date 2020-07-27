@@ -1,4 +1,5 @@
 import React from 'react'
+import { createBrowserHistory, } from 'history'
 import Input from '../../Input/Input'
 import Button from '../../Button/Button'
 import { isEmptyStringIn, } from '../../../utils/validation'
@@ -18,7 +19,7 @@ interface Props {
     loginState: LoginState,
     setLoginState: (loginState: LoginState) => void,
     sendRequest: boolean,
-    setSendRequest: (sendRequest: boolean) => void
+    setSendRequest: (sendRequest: boolean) => void,
 }
 
 const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequest, setSendRequest }) => {
@@ -27,8 +28,9 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
 
     const { username, password, } = loginState
     const { setAccessToken, } = React.useContext(UserContext)
-    const [ errorMessage, setErrorMessage, ] = React.useState('')
+    const [errorMessage, setErrorMessage,] = React.useState('')
 
+    const history = createBrowserHistory();
 
     return (
         <div className={FormContainer}>
@@ -63,12 +65,13 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                                 if (!success) {
                                     setErrorMessage(message)
                                     setSendRequest(false)
-                               
+
                                 } else {
                                     setSendRequest(false)
                                     setErrorMessage('')
                                     const { content: accessToken, } = data
                                     setAccessToken(accessToken)
+                                    history.push('/vacations')
                                 }
                             }
 
@@ -80,7 +83,7 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                 )
             }
             {
-               errorMessage !== '' &&  <Label text={errorMessage} mode="error" />
+                errorMessage !== '' && <Label text={errorMessage} mode="error" />
             }
         </div>
     )
