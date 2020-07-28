@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Vacation = require('../model/vacation');
 const { isNullIn, Response, } = require('../utils/validation');
+const vacation = require('../model/vacation');
 
 function validateVacation(req, res, next) {
 
@@ -50,6 +51,24 @@ router.post('/add-vacation', validateVacation, (req, res) => {
             .send(new Response(false, err, null))
         )
 });
+
+router.get('/vacationResource', (req, res) => {
+    Vacation.find({}, (err, result) => {
+        if (err) {
+            res.send(
+                new Response(false, err, null)
+            )
+        } else {
+            res.send(
+                new Response(
+                    true,
+                    '',
+                    result
+                )
+            )
+        }
+    })
+})
 
 
 module.exports = router;

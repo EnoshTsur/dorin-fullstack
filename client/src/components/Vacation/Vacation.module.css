@@ -1,0 +1,15 @@
+.Card {
+    max-width: 345px;
+}
+
+/* .Card::-ms-expand {
+    transform: rotate(0deg);
+    margin-left: auto;
+}
+
+@media (max-width: 345px) {
+    .Card {
+        height: 0;
+        padding-top: 56.25%;
+    }
+} */

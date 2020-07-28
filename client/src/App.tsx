@@ -22,14 +22,13 @@ const App: React.FC = () => {
 
     const { Provider, } = UserContext;
 
-
     return (
         <Provider value={({ accessToken, setAccessToken, })}>
             <Header title="Vacationary" />
             <BrowserRouter>
                 <Switch>
-                    <Route exact to='/vacations' component={Vacation} />
-                    <Route exact to='/' component={SignContainer} />
+                    <Route exact path='/sign' component={SignContainer} />
+                    <Route exact path='/vacations' component={Vacation} />
                 </Switch>
             </BrowserRouter>
             {/* <SignContainer /> */}
