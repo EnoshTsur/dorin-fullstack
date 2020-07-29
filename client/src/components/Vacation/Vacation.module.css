@@ -1,15 +1,8 @@
 .Card {
-    max-width: 345px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #ccc;
+    width: 200px;
+    padding: 20px;
+    display: inline-block;
+    margin: 10px;
 }
-
-/* .Card::-ms-expand {
-    transform: rotate(0deg);
-    margin-left: auto;
-}
-
-@media (max-width: 345px) {
-    .Card {
-        height: 0;
-        padding-top: 56.25%;
-    }
-} */
