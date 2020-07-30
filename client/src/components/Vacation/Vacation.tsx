@@ -4,10 +4,12 @@ import Card from '../Card/Card';
 
 const Vacation = () => {
 
+    const { Vcontainer, } = classes;
+
     return (
-        <>
+        <div className={Vcontainer}>
             <Card />
-        </>
+        </div>
     )
 };
 
