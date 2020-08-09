@@ -1,5 +1,4 @@
 import React from 'react'
-import { createBrowserHistory, } from 'history'
 import Input from '../../Input/Input'
 import Button from '../../Button/Button'
 import { isEmptyStringIn, } from '../../../utils/validation'
@@ -30,7 +29,6 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
     const { setAccessToken, } = React.useContext(UserContext)
     const [errorMessage, setErrorMessage,] = React.useState('')
 
-    const history = createBrowserHistory();
 
     return (
         <div className={FormContainer}>
@@ -57,7 +55,7 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                         {({ data, loading, error, }: Request) => {
 
                             if (error) {
-                                console.error('[Error]: SigninView( fetch: POST) ', error)
+                                console.error('[Error]: SigninView (fetch: POST) ', error)
                             }
 
                             if (data) {
@@ -71,7 +69,6 @@ const SigninView: React.FC<Props> = ({ role, loginState, setLoginState, sendRequ
                                     setErrorMessage('')
                                     const { content: accessToken, } = data
                                     setAccessToken(accessToken)
-                                    history.push('/vacations')
                                 }
                             }
 
