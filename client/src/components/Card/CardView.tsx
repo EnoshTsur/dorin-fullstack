@@ -8,19 +8,18 @@ import Loading from '../Loading/Loading';
 import Label from '../Label/Label';
 
 interface Props {
-    role: 'customer' | 'admin',
     vacationState: Vacation,
     setVacationState: (vacationState: Vacation) => void,
     sendRequest: boolean,
     setSendRequest: (sendRequest: boolean) => void,
 };
 
-const CardView: React.FC<Props> = ({ role, vacationState, setVacationState, sendRequest, setSendRequest, }) => {
+const CardView: React.FC<Props> = ({ vacationState, setVacationState, sendRequest, setSendRequest, }) => {
 
     const { CardItem, CardItemImage, CardItemContent, CardItemTopContent, CardItemBottomContent, BoxDate, BoxPrice, DealBox, } = classes;
 
-    const url = role === 'customer' ? GET_ALL_VACATIONS_URL : GET_ALL_VACATIONS_URL;
-    const { description, destination, image, startDate, endDate, price, followersAmount, id } = vacationState;
+    const url = GET_ALL_VACATIONS_URL;
+    const { description, destination, image, startDate, endDate, price, followersAmount, _id } = vacationState;
     const [errorMessage, setErrorMessage,] = React.useState('');
 
     return (
@@ -30,7 +29,7 @@ const CardView: React.FC<Props> = ({ role, vacationState, setVacationState, send
                 {
                     ({ data, loading, error }: Request) => {
                         if (error) {
-                            console.error('[Error]: Card (fetch: GET)')
+                            console.error('[Error]: Card (fetch: GET)', error)
                         }
 
                         if (data) {
@@ -56,7 +55,7 @@ const CardView: React.FC<Props> = ({ role, vacationState, setVacationState, send
                 errorMessage !== '' && <Label text={errorMessage} mode="error" />
             }
 
-            <div className={CardItem} key={id}>
+            <div className={CardItem} key={_id}>
                 <div className={CardItemImage}>
                     <img alt={image} src='https://www.issta.co.il/resources/deals/images/Israel_Hotels/Eilat/Isrotel_Laguna/190X190/1.jpg' />
                 </div>

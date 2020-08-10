@@ -9,7 +9,7 @@ export interface VacationProps {
 const Card: React.FC<{ render: any }> = ({ render, }) => {
 
     const [vacationState, setVacationState] = React.useState<Vacation>(
-        { description: '', destination: '', image: '', startDate: '', endDate: '', price: '', followersAmount: '', id: '' },
+        { description: '', destination: '', image: '', startDate: '', endDate: '', price: '', followersAmount: '', _id: '' },
     );
 
     return (

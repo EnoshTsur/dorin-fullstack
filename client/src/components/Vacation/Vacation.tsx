@@ -4,12 +4,11 @@ import Card, { VacationProps } from '../Card/Card';
 import { Requested, RequestState } from '../../Fetch/Fetch';
 import CardView from '../Card/CardView';
 
-const vacationCard: (role: 'customer' | 'admin') => any = role => (
-    <Card key={role}
+const vacationCard = () => (
+    <Card
         render={({ vacationState, setVacationState }: VacationProps) => (
             <Requested render={({ sendRequest, setSendRequest }: RequestState) => (
                 <CardView
-                    role={role}
                     vacationState={vacationState}
                     setVacationState={setVacationState}
                     sendRequest={sendRequest}
@@ -27,7 +26,7 @@ const Vacations: React.FC = () => {
 
     return (
         <div className={Vcontainer}>
-            {vacationCard('admin')}
+            {vacationCard()}
         </div>
     )
 };

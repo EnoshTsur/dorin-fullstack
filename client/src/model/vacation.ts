@@ -6,5 +6,5 @@ export interface Vacation {
     endDate: string,
     price: string,
     followersAmount?: string,
-    id?: string,
+    _id?: string,
 };
